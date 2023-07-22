@@ -1,1 +1,1 @@
-# nma-project
+# NMA Project
