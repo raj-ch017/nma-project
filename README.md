@@ -3,7 +3,7 @@
 ## *This project was conducted by a project group in Neuromatch Academy Computational Neuroscience.
 
 In this mini-project that was conducted as part of the [Neuromatch Academy: Computational Neuroscience 2023](https://compneuro.neuromatch.io/tutorials/intro.html), we were interested in... 
-- you should detail here with the project specifics...
+- you should detail here with the project specifics
 - you should add the finished abstract here on Monday as well
 - also, the title of the repo should be more descriptive
 - you should turn repo description on the right to something similar to this: "A short-term project for ... This project was carried out during the Neuromatch Academy Computational Neuroscience module in 2023."
