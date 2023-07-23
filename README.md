@@ -1,4 +1,4 @@
-# Exploring correlation between Brain Network activation and Personality Trait measures through Task Performance analysis in fMRI Study
+# Exploring correlation between brain network activation and personality trait measures through task performance analysis in fMRI study
 
 ## *This project was conducted by a project group in Neuromatch Academy Computational Neuroscience.
 
