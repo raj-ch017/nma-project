@@ -1,6 +1,6 @@
 # Exploring correlation between Brain Network activation and Personality Trait measures through Task Performance analysis in fMRI Study
 
-## *This project was conducted by a research group in Neuromatch Academy Computational Neuroscience.
+## *This project was conducted by a project group in Neuromatch Academy Computational Neuroscience.
 
 In this mini-project that was conducted as part of the [Neuromatch Academy: Computational Neuroscience 2023](https://compneuro.neuromatch.io/tutorials/intro.html), we were interested in... 
 - you should detail here with the project specifics...
