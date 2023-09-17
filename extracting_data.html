@@ -1,0 +1,2664 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Extracting Data &#8212; Task Prediction - fMRI Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Helper Script" href="project_main.html" />
+    <link rel="prev" title="Abstract" href="abstract.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Task Prediction - fMRI Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Extracting Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project_main.html">
+   Helper Script
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="HCP_fMRI_NMA.html">
+   Loading Task Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="test_model_NMA.html">
+   Model Fitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="presentation.html">
+   Presentation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/extracting_data.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fextracting_data.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/extracting_data.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Extracting Data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="extracting-data">
+<h1>Extracting Data<a class="headerlink" href="#extracting-data" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>‘id_file’ represents the <code class="docutils literal notranslate"><span class="pre">'subject_list.txt'</span></code> given with HCP data (inside the hcp_task folder) by NMA.</p>
+<p>It contains the subject ids of the 100 participants.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">id_file</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/Users/rajdeep_ch/Documents/nma/project/hcp_task/subjects_list.txt&#39;</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># using .loadtxt() method from numpy to load the text file</span>
+<span class="n">id_Series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">id_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The values contained in <code class="docutils literal notranslate"><span class="pre">id_Series</span></code> are floating point numbers.</p>
+<p>They are first converted to <code class="docutils literal notranslate"><span class="pre">int</span></code> and then to <code class="docutils literal notranslate"><span class="pre">str</span></code> type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">id_Series_str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">sub_id</span><span class="p">))</span> <span class="k">for</span> <span class="n">sub_id</span> <span class="ow">in</span> <span class="n">id_Series</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">csv_file</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/Users/rajdeep_ch/Documents/nma/project/alldata.csv&#39;</span> 
+
+<span class="n">allData_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">allData_df</span></code> contains data for all 1200 participants across all the tasks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1207, 383)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+      <th>Unnamed: 6</th>
+      <th>Unnamed: 7</th>
+      <th>Unnamed: 8</th>
+      <th>Unnamed: 9</th>
+      <th>...</th>
+      <th>Unnamed: 373</th>
+      <th>Unnamed: 374</th>
+      <th>Unnamed: 375</th>
+      <th>Unnamed: 376</th>
+      <th>Unnamed: 377</th>
+      <th>Unnamed: 378</th>
+      <th>Unnamed: 379</th>
+      <th>Unnamed: 380</th>
+      <th>Unnamed: 381</th>
+      <th>Unnamed: 382</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Subject</td>
+      <td>Release</td>
+      <td>Acquisition</td>
+      <td>Gender</td>
+      <td>Age</td>
+      <td>3T_Full_MR_Compl</td>
+      <td>T1_Count</td>
+      <td>T2_Count</td>
+      <td>3T_RS-fMRI_Count</td>
+      <td>3T_RS-fMRI_PctCompl</td>
+      <td>...</td>
+      <td>Noise_Comp</td>
+      <td>Odor_Unadj</td>
+      <td>Odor_AgeAdj</td>
+      <td>PainIntens_RawScore</td>
+      <td>PainInterf_Tscore</td>
+      <td>Taste_Unadj</td>
+      <td>Taste_AgeAdj</td>
+      <td>Mars_Log_Score</td>
+      <td>Mars_Errs</td>
+      <td>Mars_Final</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100004</td>
+      <td>S900</td>
+      <td>Q06</td>
+      <td>M</td>
+      <td>22-25</td>
+      <td>FALSE</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>5.2</td>
+      <td>101.12</td>
+      <td>86.45</td>
+      <td>2</td>
+      <td>45.9</td>
+      <td>107.17</td>
+      <td>105.31</td>
+      <td>1.8</td>
+      <td>0</td>
+      <td>1.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100206</td>
+      <td>S900</td>
+      <td>Q11</td>
+      <td>M</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>6.0</td>
+      <td>108.79</td>
+      <td>97.19</td>
+      <td>1</td>
+      <td>49.7</td>
+      <td>72.63</td>
+      <td>72.03</td>
+      <td>1.84</td>
+      <td>0</td>
+      <td>1.84</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100307</td>
+      <td>Q1</td>
+      <td>Q01</td>
+      <td>F</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>3.6</td>
+      <td>101.12</td>
+      <td>86.45</td>
+      <td>0</td>
+      <td>38.6</td>
+      <td>71.69</td>
+      <td>71.76</td>
+      <td>1.76</td>
+      <td>0</td>
+      <td>1.76</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100408</td>
+      <td>Q3</td>
+      <td>Q03</td>
+      <td>M</td>
+      <td>31-35</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>108.79</td>
+      <td>98.04</td>
+      <td>2</td>
+      <td>52.6</td>
+      <td>114.01</td>
+      <td>113.59</td>
+      <td>1.76</td>
+      <td>2</td>
+      <td>1.68</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 383 columns</p>
+</div></div></div>
+</div>
+<p>Cleaned the dataframe by using row 0 as the column names of the dataframe.</p>
+<p>The 0th row is then deleted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">allData_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>Release</th>
+      <th>Acquisition</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>3T_Full_MR_Compl</th>
+      <th>T1_Count</th>
+      <th>T2_Count</th>
+      <th>3T_RS-fMRI_Count</th>
+      <th>3T_RS-fMRI_PctCompl</th>
+      <th>...</th>
+      <th>Noise_Comp</th>
+      <th>Odor_Unadj</th>
+      <th>Odor_AgeAdj</th>
+      <th>PainIntens_RawScore</th>
+      <th>PainInterf_Tscore</th>
+      <th>Taste_Unadj</th>
+      <th>Taste_AgeAdj</th>
+      <th>Mars_Log_Score</th>
+      <th>Mars_Errs</th>
+      <th>Mars_Final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Subject</td>
+      <td>Release</td>
+      <td>Acquisition</td>
+      <td>Gender</td>
+      <td>Age</td>
+      <td>3T_Full_MR_Compl</td>
+      <td>T1_Count</td>
+      <td>T2_Count</td>
+      <td>3T_RS-fMRI_Count</td>
+      <td>3T_RS-fMRI_PctCompl</td>
+      <td>...</td>
+      <td>Noise_Comp</td>
+      <td>Odor_Unadj</td>
+      <td>Odor_AgeAdj</td>
+      <td>PainIntens_RawScore</td>
+      <td>PainInterf_Tscore</td>
+      <td>Taste_Unadj</td>
+      <td>Taste_AgeAdj</td>
+      <td>Mars_Log_Score</td>
+      <td>Mars_Errs</td>
+      <td>Mars_Final</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100004</td>
+      <td>S900</td>
+      <td>Q06</td>
+      <td>M</td>
+      <td>22-25</td>
+      <td>FALSE</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>5.2</td>
+      <td>101.12</td>
+      <td>86.45</td>
+      <td>2</td>
+      <td>45.9</td>
+      <td>107.17</td>
+      <td>105.31</td>
+      <td>1.8</td>
+      <td>0</td>
+      <td>1.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100206</td>
+      <td>S900</td>
+      <td>Q11</td>
+      <td>M</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>6.0</td>
+      <td>108.79</td>
+      <td>97.19</td>
+      <td>1</td>
+      <td>49.7</td>
+      <td>72.63</td>
+      <td>72.03</td>
+      <td>1.84</td>
+      <td>0</td>
+      <td>1.84</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100307</td>
+      <td>Q1</td>
+      <td>Q01</td>
+      <td>F</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>3.6</td>
+      <td>101.12</td>
+      <td>86.45</td>
+      <td>0</td>
+      <td>38.6</td>
+      <td>71.69</td>
+      <td>71.76</td>
+      <td>1.76</td>
+      <td>0</td>
+      <td>1.76</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100408</td>
+      <td>Q3</td>
+      <td>Q03</td>
+      <td>M</td>
+      <td>31-35</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>108.79</td>
+      <td>98.04</td>
+      <td>2</td>
+      <td>52.6</td>
+      <td>114.01</td>
+      <td>113.59</td>
+      <td>1.76</td>
+      <td>2</td>
+      <td>1.68</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 383 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span> <span class="o">=</span> <span class="n">allData_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>Release</th>
+      <th>Acquisition</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>3T_Full_MR_Compl</th>
+      <th>T1_Count</th>
+      <th>T2_Count</th>
+      <th>3T_RS-fMRI_Count</th>
+      <th>3T_RS-fMRI_PctCompl</th>
+      <th>...</th>
+      <th>Noise_Comp</th>
+      <th>Odor_Unadj</th>
+      <th>Odor_AgeAdj</th>
+      <th>PainIntens_RawScore</th>
+      <th>PainInterf_Tscore</th>
+      <th>Taste_Unadj</th>
+      <th>Taste_AgeAdj</th>
+      <th>Mars_Log_Score</th>
+      <th>Mars_Errs</th>
+      <th>Mars_Final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>100004</td>
+      <td>S900</td>
+      <td>Q06</td>
+      <td>M</td>
+      <td>22-25</td>
+      <td>FALSE</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>5.2</td>
+      <td>101.12</td>
+      <td>86.45</td>
+      <td>2</td>
+      <td>45.9</td>
+      <td>107.17</td>
+      <td>105.31</td>
+      <td>1.8</td>
+      <td>0</td>
+      <td>1.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100206</td>
+      <td>S900</td>
+      <td>Q11</td>
+      <td>M</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>6.0</td>
+      <td>108.79</td>
+      <td>97.19</td>
+      <td>1</td>
+      <td>49.7</td>
+      <td>72.63</td>
+      <td>72.03</td>
+      <td>1.84</td>
+      <td>0</td>
+      <td>1.84</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100307</td>
+      <td>Q1</td>
+      <td>Q01</td>
+      <td>F</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>3.6</td>
+      <td>101.12</td>
+      <td>86.45</td>
+      <td>0</td>
+      <td>38.6</td>
+      <td>71.69</td>
+      <td>71.76</td>
+      <td>1.76</td>
+      <td>0</td>
+      <td>1.76</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100408</td>
+      <td>Q3</td>
+      <td>Q03</td>
+      <td>M</td>
+      <td>31-35</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>108.79</td>
+      <td>98.04</td>
+      <td>2</td>
+      <td>52.6</td>
+      <td>114.01</td>
+      <td>113.59</td>
+      <td>1.76</td>
+      <td>2</td>
+      <td>1.68</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>100610</td>
+      <td>S900</td>
+      <td>Q08</td>
+      <td>M</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>122.25</td>
+      <td>110.45</td>
+      <td>0</td>
+      <td>38.6</td>
+      <td>84.84</td>
+      <td>85.31</td>
+      <td>1.92</td>
+      <td>1</td>
+      <td>1.88</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1202</th>
+      <td>992774</td>
+      <td>Q2</td>
+      <td>Q02</td>
+      <td>M</td>
+      <td>31-35</td>
+      <td>TRUE</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>8.4</td>
+      <td>122.25</td>
+      <td>111.41</td>
+      <td>4</td>
+      <td>50.1</td>
+      <td>107.17</td>
+      <td>103.55</td>
+      <td>1.76</td>
+      <td>0</td>
+      <td>1.76</td>
+    </tr>
+    <tr>
+      <th>1203</th>
+      <td>993675</td>
+      <td>S900</td>
+      <td>Q09</td>
+      <td>F</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>0.4</td>
+      <td>122.25</td>
+      <td>110.45</td>
+      <td>0</td>
+      <td>38.6</td>
+      <td>84.07</td>
+      <td>84.25</td>
+      <td>1.8</td>
+      <td>1</td>
+      <td>1.76</td>
+    </tr>
+    <tr>
+      <th>1204</th>
+      <td>994273</td>
+      <td>S500</td>
+      <td>Q06</td>
+      <td>M</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>6.0</td>
+      <td>122.25</td>
+      <td>111.41</td>
+      <td>7</td>
+      <td>63.8</td>
+      <td>110.65</td>
+      <td>109.73</td>
+      <td>1.8</td>
+      <td>1</td>
+      <td>1.76</td>
+    </tr>
+    <tr>
+      <th>1205</th>
+      <td>995174</td>
+      <td>S1200</td>
+      <td>Q13</td>
+      <td>M</td>
+      <td>22-25</td>
+      <td>FALSE</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>3.6</td>
+      <td>88.61</td>
+      <td>64.58</td>
+      <td>3</td>
+      <td>50.1</td>
+      <td>117.16</td>
+      <td>117.4</td>
+      <td>1.8</td>
+      <td>0</td>
+      <td>1.8</td>
+    </tr>
+    <tr>
+      <th>1206</th>
+      <td>996782</td>
+      <td>S900</td>
+      <td>Q08</td>
+      <td>F</td>
+      <td>26-30</td>
+      <td>TRUE</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>100.0</td>
+      <td>...</td>
+      <td>6.0</td>
+      <td>108.79</td>
+      <td>97.19</td>
+      <td>0</td>
+      <td>38.6</td>
+      <td>75.43</td>
+      <td>73.72</td>
+      <td>1.84</td>
+      <td>0</td>
+      <td>1.84</td>
+    </tr>
+  </tbody>
+</table>
+<p>1206 rows × 383 columns</p>
+</div></div></div>
+</div>
+<p>This is how the dataframe looks now.</p>
+<p>From this dataframe, personality data is extracted.</p>
+<p>The personality data columns have start index of 308 and end index of 373.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allData_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">308</span><span class="p">:</span><span class="mi">373</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>NEORAW_05</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>27</td>
+      <td>15</td>
+      <td>28</td>
+      <td>24</td>
+      <td>25</td>
+      <td>A</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>29</td>
+      <td>23</td>
+      <td>26</td>
+      <td>21</td>
+      <td>32</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>37</td>
+      <td>24</td>
+      <td>35</td>
+      <td>15</td>
+      <td>37</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>29</td>
+      <td>34</td>
+      <td>15</td>
+      <td>33</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>...</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>31</td>
+      <td>33</td>
+      <td>36</td>
+      <td>7</td>
+      <td>15</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>SD</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1202</th>
+      <td>36</td>
+      <td>24</td>
+      <td>39</td>
+      <td>16</td>
+      <td>32</td>
+      <td>N</td>
+      <td>N</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>SD</td>
+      <td>A</td>
+      <td>SD</td>
+      <td>SA</td>
+    </tr>
+    <tr>
+      <th>1203</th>
+      <td>42</td>
+      <td>31</td>
+      <td>37</td>
+      <td>10</td>
+      <td>24</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>A</td>
+      <td>N</td>
+      <td>...</td>
+      <td>D</td>
+      <td>N</td>
+      <td>A</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>SA</td>
+    </tr>
+    <tr>
+      <th>1204</th>
+      <td>28</td>
+      <td>32</td>
+      <td>29</td>
+      <td>22</td>
+      <td>27</td>
+      <td>D</td>
+      <td>D</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1205</th>
+      <td>27</td>
+      <td>30</td>
+      <td>41</td>
+      <td>18</td>
+      <td>36</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>A</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>SA</td>
+    </tr>
+    <tr>
+      <th>1206</th>
+      <td>34</td>
+      <td>32</td>
+      <td>35</td>
+      <td>20</td>
+      <td>22</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>...</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>A</td>
+      <td>D</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>1206 rows × 65 columns</p>
+</div></div></div>
+</div>
+<p>The personality data for all 1200 participants in stored in the variable <code class="docutils literal notranslate"><span class="pre">testing_personality</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">testing_personality</span> <span class="o">=</span> <span class="n">allData_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">308</span><span class="p">:</span><span class="mi">373</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">testing_personality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>NEORAW_05</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>27</td>
+      <td>15</td>
+      <td>28</td>
+      <td>24</td>
+      <td>25</td>
+      <td>A</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>29</td>
+      <td>23</td>
+      <td>26</td>
+      <td>21</td>
+      <td>32</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>37</td>
+      <td>24</td>
+      <td>35</td>
+      <td>15</td>
+      <td>37</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>29</td>
+      <td>34</td>
+      <td>15</td>
+      <td>33</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>...</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>31</td>
+      <td>33</td>
+      <td>36</td>
+      <td>7</td>
+      <td>15</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>N</td>
+      <td>...</td>
+      <td>SD</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 65 columns</p>
+</div></div></div>
+</div>
+<p>Extracting the subject ids for all 1200 participants in the variable <code class="docutils literal notranslate"><span class="pre">all_id</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_id</span> <span class="o">=</span> <span class="n">allData_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_id</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1       100004
+2       100206
+3       100307
+4       100408
+5       100610
+         ...  
+1202    992774
+1203    993675
+1204    994273
+1205    995174
+1206    996782
+Name: Subject, Length: 1206, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>A new dataframe, named <code class="docutils literal notranslate"><span class="pre">personality_df</span></code> is created by extracting personality data from <code class="docutils literal notranslate"><span class="pre">allData_df</span></code> and combining it with <code class="docutils literal notranslate"><span class="pre">all_id</span></code>.</p>
+<p>It contains the personality data for all 1200 participants.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">all_id</span><span class="p">,</span><span class="n">testing_personality</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>100004</td>
+      <td>27</td>
+      <td>15</td>
+      <td>28</td>
+      <td>24</td>
+      <td>25</td>
+      <td>A</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100206</td>
+      <td>29</td>
+      <td>23</td>
+      <td>26</td>
+      <td>21</td>
+      <td>32</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100307</td>
+      <td>37</td>
+      <td>24</td>
+      <td>35</td>
+      <td>15</td>
+      <td>37</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>A</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100408</td>
+      <td>33</td>
+      <td>29</td>
+      <td>34</td>
+      <td>15</td>
+      <td>33</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>100610</td>
+      <td>31</td>
+      <td>33</td>
+      <td>36</td>
+      <td>7</td>
+      <td>15</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>SD</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 66 columns</p>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">personality_subset</span></code> dataframe is meant to contain the personality data for the 100 participants.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_subset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">personality_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_subset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<p>0 rows × 66 columns</p>
+</div></div></div>
+</div>
+<p>Looping through the list <code class="docutils literal notranslate"><span class="pre">id_Series_str</span></code>, which contains the subject ids of the 100 participants we want, the personality data for that respective participant <code class="docutils literal notranslate"><span class="pre">subset_id</span></code> is extracted from the personality data of all 1200 participants.</p>
+<p>The extracted value is added to <code class="docutils literal notranslate"><span class="pre">personality_subset</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subset_id</span> <span class="ow">in</span> <span class="n">id_Series_str</span><span class="p">:</span>
+
+    <span class="n">subject_data</span> <span class="o">=</span> <span class="n">personality_df</span><span class="p">[</span><span class="n">personality_df</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">subset_id</span><span class="p">]</span>
+    <span class="n">personality_subset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">personality_subset</span><span class="p">,</span> <span class="n">subject_data</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_subset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>100307</td>
+      <td>37</td>
+      <td>24</td>
+      <td>35</td>
+      <td>15</td>
+      <td>37</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>A</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100408</td>
+      <td>33</td>
+      <td>29</td>
+      <td>34</td>
+      <td>15</td>
+      <td>33</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>101915</td>
+      <td>35</td>
+      <td>30</td>
+      <td>45</td>
+      <td>8</td>
+      <td>31</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>SD</td>
+      <td>SD</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SA</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>102816</td>
+      <td>36</td>
+      <td>27</td>
+      <td>32</td>
+      <td>10</td>
+      <td>31</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>SD</td>
+      <td>A</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>SA</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>103414</td>
+      <td>27</td>
+      <td>30</td>
+      <td>31</td>
+      <td>20</td>
+      <td>34</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 66 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_subset</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 66)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The dataframe is then converted to a csv file and saved.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">index</span></code> argument is set to False for <code class="docutils literal notranslate"><span class="pre">to_csv</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_subset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;/Users/rajdeep_ch/Documents/nma/project/personality_data.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>100004</td>
+      <td>27</td>
+      <td>15</td>
+      <td>28</td>
+      <td>24</td>
+      <td>25</td>
+      <td>A</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100206</td>
+      <td>29</td>
+      <td>23</td>
+      <td>26</td>
+      <td>21</td>
+      <td>32</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>N</td>
+      <td>A</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100307</td>
+      <td>37</td>
+      <td>24</td>
+      <td>35</td>
+      <td>15</td>
+      <td>37</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>A</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100408</td>
+      <td>33</td>
+      <td>29</td>
+      <td>34</td>
+      <td>15</td>
+      <td>33</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>100610</td>
+      <td>31</td>
+      <td>33</td>
+      <td>36</td>
+      <td>7</td>
+      <td>15</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>SD</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 66 columns</p>
+</div></div></div>
+</div>
+<p>Note that the subject <code class="docutils literal notranslate"><span class="pre">131924</span></code> does not have data for the Big Five Inventory questions but does have scores for the five personality traits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_df</span><span class="p">[</span><span class="n">personality_df</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;131924&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>178</th>
+      <td>131924</td>
+      <td>30</td>
+      <td>30</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 66 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">personality_subset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>NEOFAC_A</th>
+      <th>NEOFAC_O</th>
+      <th>NEOFAC_C</th>
+      <th>NEOFAC_N</th>
+      <th>NEOFAC_E</th>
+      <th>NEORAW_01</th>
+      <th>NEORAW_02</th>
+      <th>NEORAW_03</th>
+      <th>NEORAW_04</th>
+      <th>...</th>
+      <th>NEORAW_51</th>
+      <th>NEORAW_52</th>
+      <th>NEORAW_53</th>
+      <th>NEORAW_54</th>
+      <th>NEORAW_55</th>
+      <th>NEORAW_56</th>
+      <th>NEORAW_57</th>
+      <th>NEORAW_58</th>
+      <th>NEORAW_59</th>
+      <th>NEORAW_60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>100307</td>
+      <td>37</td>
+      <td>24</td>
+      <td>35</td>
+      <td>15</td>
+      <td>37</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>A</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SD</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100408</td>
+      <td>33</td>
+      <td>29</td>
+      <td>34</td>
+      <td>15</td>
+      <td>33</td>
+      <td>D</td>
+      <td>A</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>N</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>101915</td>
+      <td>35</td>
+      <td>30</td>
+      <td>45</td>
+      <td>8</td>
+      <td>31</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>SA</td>
+      <td>SD</td>
+      <td>SD</td>
+      <td>SD</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>SA</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>102816</td>
+      <td>36</td>
+      <td>27</td>
+      <td>32</td>
+      <td>10</td>
+      <td>31</td>
+      <td>A</td>
+      <td>D</td>
+      <td>N</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>SD</td>
+      <td>A</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>N</td>
+      <td>D</td>
+      <td>SA</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>103414</td>
+      <td>27</td>
+      <td>30</td>
+      <td>31</td>
+      <td>20</td>
+      <td>34</td>
+      <td>D</td>
+      <td>A</td>
+      <td>A</td>
+      <td>SA</td>
+      <td>...</td>
+      <td>D</td>
+      <td>SA</td>
+      <td>A</td>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+      <td>N</td>
+      <td>N</td>
+      <td>D</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 66 columns</p>
+</div></div></div>
+</div>
+<hr class="docutils" />
+<p>Preliminarly going through the personality trait scores to check max, min.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neofac_a</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">score1</span><span class="p">)</span> <span class="k">for</span> <span class="n">score1</span> <span class="ow">in</span> <span class="n">personality_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">neofac_a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neofac_b</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">score2</span><span class="p">)</span> <span class="k">for</span> <span class="n">score2</span> <span class="ow">in</span> <span class="n">personality_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">neofac_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neofac_c</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">score3</span><span class="p">)</span> <span class="k">for</span> <span class="n">score3</span> <span class="ow">in</span> <span class="n">personality_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">neofac_c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neofac_d</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">score4</span><span class="p">)</span> <span class="k">for</span> <span class="n">score4</span> <span class="ow">in</span> <span class="n">personality_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">neofac_d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neofac_e</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">score5</span><span class="p">)</span> <span class="k">for</span> <span class="n">score5</span> <span class="ow">in</span> <span class="n">personality_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">5</span><span class="p">]]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">neofac_e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">score_val</span><span class="p">)</span> <span class="k">for</span> <span class="n">score_val</span> <span class="ow">in</span> <span class="n">personality_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">5</span><span class="p">]</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">score_val</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="abstract.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Abstract</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="project_main.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Helper Script</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Cognitive Cortex Crew<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
